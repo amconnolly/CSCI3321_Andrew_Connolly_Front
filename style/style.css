@@ -1,8 +1,21 @@
-.nav {
-    list-style-type: none;
+header{
     text-align:center;
-    margin: 0;
-    padding: 0;
+    border-style:solid;
+    border-color: Blue;
+    border-width: 10px;
+    background: white;
+    margin:50px 100px;
+    border-radius: 50px;
+}
+
+#logo {
+    width: 100px;
+    vertical-align: middle;
+}
+
+.nav {
+    display: inline;
+    list-style-type: none;
 }
 
 .nav li {
@@ -11,6 +24,30 @@
     padding: 20px;
 }
 
-body {
-    background-color: yellow;
+main {
+    text-align:center;
+    background-color: white;
+    width: 550px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+    border-style:solid;
+    border-color: Blue;
+    border-width: 10px;
+    margin: auto;
+    border-radius: 50px;
 }
+
+#profile{
+    width: 300px;
+    padding: 15px;
+}
+
+h1, h2{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    background-image: url("/images/computer_background.jpg");
+    color: darkblue
+}
+
