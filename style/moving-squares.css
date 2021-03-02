@@ -1,41 +1,41 @@
 #square-container{
     border: 1px #000000 solid;
-    margin:auto;
-    min-height: 400px;
+    margin: auto;
+    width: 800px;
+    height: 450px;
+    transition: all 3s;
 }
 
-.even{
-    border: 1px #000000 sollid;
-    background-color: #0000ff;
+#square-container div{
+    border: 1px #000000 solid;
+    color: #ffffff;
     width: 50px;
     height: 50px;
-    margin: auto;
-    margin: 2px auto;
-    color: #ffffff;
+    margin: 4px auto;
     font-weight: bold;
     text-align: center;
     line-height: 50px;
     transition: all 3s;
 }
 
+.even{
+    background-color: #0000ff;
+}
+
 .odd{
-    border: 1px #000000 dashed;
     background-color: #61249d;
-    width: 50px;
-    height: 50px;
-    margin: auto;
-    margin: 2px auto;
-    color: #ffffff;
-    font-weight: bold;
-    text-align:center;
-    line-height: 50px;
-    transition: all 3s;
+}
+
+.containter:hover{
+    border-radius: 25px;
+    padding-top: 10px;
+    padding-bottom: 40px;
 }
 
 #square-container:hover .even{
-    transform: translateX(-100px) rotate(1080deg);
+    transform: translateX(-340px) rotate(1080deg) scale(2);
 }
 
 #square-container:hover .odd{
-    transform: translateX(100px) rotate(-1080deg);
+    transform: translateX(375px) rotate(-1080deg) scale(.75);
 }
