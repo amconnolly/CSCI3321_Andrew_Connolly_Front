@@ -1,3 +1,8 @@
+//This global variable is used to determine if the display box has the answer to the privious equation or if a new one is bieng entered
+//This means if an answer is displayed and the user enters a new number, it will be cleared before the number is added
+//If the answer is displayed and an opertaional sign is press, it will concat onto the answer
+var answerDisplayed = false;
+
 //This function is used to calculate the answer for the equation that is in the display box from left to right when the equal key is pressed
 function calculate()
 {
@@ -44,6 +49,7 @@ function calculate()
         }
     }
     //set the display to be the total
+    answerDisplayed = true;
     d.innerHTML = total;
 }
 
@@ -52,9 +58,9 @@ function updateDisplay(newValue)
     var d = document.getElementById('display');
     //if either ERR or UNDEFINED is displayed, they are removed before the next item is added
     if (d.innerHTML == "ERR" || d.innerHTML == "UNDEFINED")
-        d.innerHTML = ''
+        d.innerHTML = '';
     //makes sure the equation does not go outside of the box
-    if (d.innerHTML.length >= 22 && newValue != '')
+    if (d.innerHTML.length >= 23 && newValue != '')
         return;
     //checks which key is pressed
     switch(newValue)
@@ -70,12 +76,21 @@ function updateDisplay(newValue)
             else if (d.innerHTML.endsWith(" + ") || d.innerHTML.endsWith(" - ") || d.innerHTML.endsWith(" * ") || d.innerHTML.endsWith(" / "))
                 return;
             else
-                break;
+            {
+                d.innerHTML += newValue;
+                answerDisplayed = false;
+                return;
+            }
         //if clear is pressed, wipe the display box
         case '':
             d.innerHTML = '';
-        break;
+            break;
     }
     //add the key pressed to the display box
+    if (answerDisplayed == true)
+    {
+        d.innerHTML = '';
+        answerDisplayed = false;
+    }
     d.innerHTML += newValue;
 }

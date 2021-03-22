@@ -4,6 +4,7 @@
     background-color:dodgerblue;
     padding: 10px;
     text-align: center;
+    font-size: 24px;
     display: grid;
     grid-gap: 5px;
     grid-template-areas: 
@@ -18,9 +19,8 @@
 .key{
     height: 55px;
     background-color: white;
-    border-radius: 3px;
+    border-radius: 5px;
     line-height: 55px;
-    font-size: 24px;
     cursor: grab;
 }
 
@@ -30,7 +30,6 @@
     height: 50px;
     line-height: 50px;
     background-color: white;
-    font-size: 24px;
     text-align: right;
     padding: 10px;
 }
