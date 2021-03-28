@@ -1,43 +1,105 @@
-var gameOver = false;
-var totalMove = 0;
-var currentPlayer = 'X';
+var gameOver, totalMove, currentPlayer, board;
 
-function placeMarker(spotID)
+//creates the empty array to store the board into
+function makeEmptyArray()
 {
-    if (!gameOver){
-    //get spot by spot/element ID
-    // if the game is not over
-        //if spot is empty
-            //place the marker by changing the innerHTML)
-            //check if the current player won the game using currentPlayerWon()
-            //if yes, display message
-            //if no, switch player, totalMove++
-        //else
-            //do nothing
-    //else the game is over
-        //do nothing
+    board = [[],[],[]];
+    for(let i = 0; i < 3; i++)
+    {
+        for(let j = 0; j < 3; j++)
+            board[i][j] = '';
+    }
+    return board;
+}
+
+//allows the current player to make a move
+//takes in the spot id and x/y loaction
+function placeMarker(x, y, spotID)
+{
+    //checks if the game is still going
+    if(gameOver == false)
+    {
+        var space = document.getElementById(spotID);
+        //checks that nothing is in the spot
+        if(space.innerHTML == '')
+        {
+            board[x][y] = currentPlayer;
+            space.innerHTML = currentPlayer;
+            currentPlayerWon(x, y);
+            updateGameStatus();
+        }
     }
 }
 
-function CurrentPlayerWon(){
-    // get each spot using getElementByID()
-    // for example, s1 = document.getElementById('1')
-    // s2 = document.getElementByID('2')
-    // s2 = document.getElementByID('3')
-    //if
-        //(s1.innerHTML ===s2.innerHTML && s2.innerHTML === s3.innerHTML) <= first row
-        // || (s4.innerHTML ===s5.innerHTML && s5.innerHTML === s6.innerHTML) <= first row
-        // || (s7.innerHTML ===s8.innerHTML && s8.innerHTML === s9.innerHTML) <= first row
-        //...
-        //gameOver = true;
-    //else
-        //gameOver = false;
-    
-        // if (!gameOver){
-            //if (totalMove == 8){
-                //gameOver = true
-            //}
+//checks if the current player won, taking on the moves position
+function currentPlayerWon(x, y)
+{
+    let check = currentPlayer + currentPlayer + currentPlayer;
+    let row = '', col = '', diag = '', diag2 = '';
 
-        //}
+    //check row and columb
+    for(var i = 0; i < 3; i++)
+    {
+        row += board[x][i];
+        col += board[i][y];
+    }
+
+    //checks top left to bottom right
+    if(x - y == 0 || (x == 1 && y == 1))
+        diag = board[0][0] + board[1][1] + board[2][2];
+
+    //checks top right to bottom left
+    if (Math.abs(x - y) == 2 || (x == 1 && y == 1))
+        diag2 = board[0][2] + board[1][1] + board[2][0];
     
+    //if three in a row, current player wins else, total moves goes up and checks for tie
+    if(row == check || col == check || diag == check || diag2 == check)
+        gameOver = true;
+    else
+    {
+        totalMove++;
+        if(totalMove == 9)
+            gameOver = true;
+    } 
+}
+
+//updates the message, game over status, and button visibility or current player
+function updateGameStatus()
+{
+    let message;
+    if (gameOver)
+    {
+        if(totalMove == 9)
+            message = "THE GAME IS A TIE!";
+        else
+            message = currentPlayer + " WON THE GAME!";
+        document.getElementById("start").hidden = false;
+    }
+    else
+    {
+        if(currentPlayer == 'X')
+            currentPlayer = 'O';
+        else
+            currentPlayer = 'X';
+        message = "Player " + currentPlayer + "'s turn"
+    }
+    document.getElementById("messageBox").innerHTML = message;
+}
+
+//sets the game state back to its starting point for start/restart button
+function restartGame()
+{
+    let button = document.getElementById("start");
+    let messageBox =document.getElementById("messageBox");
+
+    button.hidden = true;
+    button.innerHTML = "Restart";
+    messageBox.hidden = false;
+    messageBox.innerHTML = "Player X starts first";
+    currentPlayer = 'X';
+    board = makeEmptyArray();
+    gameOver = false;
+    totalMove = 0;
+    for(let i = 1; i <= 9; i++)
+        document.getElementById(i).innerHTML = '';
 }
